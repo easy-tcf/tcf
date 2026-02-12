@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test TCF - Grammaire</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #0b3b5c;
+            font-size: 28px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e7ef;
+        }
+        .question p {
+            font-weight: 600;
+            color: #1e2f4e;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+            background: #f9fcff;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        label:hover {
+            background: #e5f0fd;
+            border-color: #0077b6;
+        }
+        button {
+            background: #0077b6;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+            width: 100%;
+        }
+        .result {
+            background: #e1ecf4;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 25px;
+            display: none;
+        }
+        .score {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0b3b5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📘 Test TCF – Structure grammaticale</h1>
+        <p>5 questions. Choisis la bonne réponse.</p>
+
+        <div id="quiz">
+            <div class="question">
+                <p>1️⃣ Il faut que tu ______ plus tôt.</p>
+                <label><input type="radio" name="q1" value="0"> viens</label>
+                <label><input type="radio" name="q1" value="1"> viennes</label>
+                <label><input type="radio" name="q1" value="0"> venais</label>
+            </div>
+            <div class="question">
+                <p>2️⃣ Si j’avais su, je ______ venu.</p>
+                <label><input type="radio" name="q2" value="0"> serais</label>
+                <label><input type="radio" name="q2" value="1"> serais venu</label>
+                <label><input type="radio" name="q2" value="0"> serai venu</label>
+            </div>
+            <div class="question">
+                <p>3️⃣ Elle est ______ en 1995.</p>
+                <label><input type="radio" name="q3" value="0"> née</label>
+                <label><input type="radio" name="q3" value="1"> né</label>
+                <label><input type="radio" name="q3" value="0"> nés</label>
+            </div>
+            <div class="question">
+                <p>4️⃣ Je te téléphonerai dès que je ______ arrivé.</p>
+                <label><input type="radio" name="q4" value="0"> serai</label>
+                <label><input type="radio" name="q4" value="0"> suis</label>
+                <label><input type="radio" name="q4" value="1"> sois</label>
+            </div>
+            <div class="question">
+                <p>5️⃣ C’est la fille ______ je t’ai parlé.</p>
+                <label><input type="radio" name="q5" value="0"> qui</label>
+                <label><input type="radio" name="q5" value="1"> dont</label>
+                <label><input type="radio" name="q5" value="0"> que</label>
+            </div>
+        </div>
+
+        <button onclick="corriger()">✅ Voir mon score</button>
+
+        <div id="resultat" class="result">
+            <p>🎯 Ton score</p>
+            <div id="score" class="score">0/5</div>
+            <p id="feedback"></p>
+        </div>
+    </div>
+
+    <script>
+        function corriger() {
+            const reponses = ['q1', 'q2', 'q3', 'q4', 'q5'];
+            const correct = ['1', '1', '0', '2', '1']; // indices des bonnes réponses
+            let score = 0;
+
+            reponses.forEach((name, index) => {
+                const radios = document.getElementsByName(name);
+                for (let i = 0; i < radios.length; i++) {
+                    if (radios[i].checked && radios[i].value === correct[index]) {
+                        score++;
+                    }
+                }
+            });
+
+            document.getElementById('score').innerText = score + '/5';
+            document.getElementById('resultat').style.display = 'block';
+            
+            if (score === 5) {
+                document.getElementById('feedback').innerText = 'Bravo ! Niveau C1/C2 👏';
+            } else if (score >= 3) {
+                document.getElementById('feedback').innerText = 'Bien ! Continue à réviser 📚';
+            } else {
+                document.getElementById('feedback').innerText = 'Tu peux t’améliorer, voici les corrections.';
+            }
+        }
+    </script>
+</body>
+</html>
